@@ -84,6 +84,45 @@
                 $scope.newFalsy = '';
             };
 
+            $scope.addNewQuiz = function () {
+                $scope.keywordSelection.forEach(function (keyword) {
+                    quizes.list.push(
+                        {
+                            stem: ,
+                            truthy: ,
+                            falsey: ,
+                            keywords: [
+                                
 
-        }); // END OF CONTROLLER 'editController.js'
+
+
+                            ]
+                        });
+
+
+                });
+            };
+// [
+//                 {
+//                     stem: "Javascript...",
+//                     truthy: ["rocks!", "has function scope."],
+//                     falsey: ["is class-based.", "has block scope."],
+//                     keywords: [
+//                         {
+//                             name: "JavaScript",
+//                             subjects: ["Computer Science"]
+//                         },
+//                         {
+//                             name: "this",
+//                             subjects: ["Computer Science"]
+//                         },
+//                         {
+//                             name: "Closures",
+//                             subjects: ["Computer Science"]
+//                         }]
+//
+//
+                });
+
+        // END OF CONTROLLER 'editController.js'
 } ());
