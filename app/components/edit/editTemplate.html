@@ -1,6 +1,6 @@
 <div class="container">
-    <form ng-submit="addNewSubject()" action="" name="newSubjectForm">
-        <div class="panel panel-default">
+    <form action="" name="newSubjectForm">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Subject</h3>
             </div>
@@ -13,14 +13,14 @@
                 <div class="form-group">
                     <input required ng-pattern="/.{3}/" ng-model="newSubjectName" id="subjects-list" type="text" class="form-control" placeholder="Type name of new subject...">
                 </div>
-                <button ng-disabled="newSubjectForm.$invalid" type="submit" class="btn btn-default">Create New!</button>
+                <button ng-disabled="newSubjectForm.$invalid" type="submit" class="btn btn-danger" ng-click="addNewSubject()">Create New!</button>
             </div>
-            <p>{{ subjectsList }}</p>
-            <p>{{ subjectSelection }}</p>
+            <!--<p>{{ subjectsList }}</p>
+            <p>{{ subjectSelection }}</p>-->
         </div>
     </form>
-    <form ng-submit="addNewKeyword()" action="" name="newKeywordForm" ng-hide="subjectChecked" ng-show="-subjectChecked">
-        <div class="panel panel-default">
+    <form action="" name="newKeywordForm" ng-hide="subjectChecked" ng-show="-subjectChecked">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Keyword</h3>
             </div>
@@ -33,11 +33,48 @@
                 <div class="form-group">
                     <input required ng-pattern="/.{3}/" ng-model="newKeywordName" id="keywords-list" type="text" class="form-control" placeholder="Type name of new keyword...">
                 </div>
-                <button ng-disabled="newKeywordForm.$invalid" type="submit" class="btn btn-default">Create New!</button>
+                <button ng-disabled="newKeywordForm.$invalid" type="submit" class="btn btn-danger" ng-click="addNewKeyword()">Create New!</button>
             </div>
-            <p>{{ keywordsList }}</p>
+            <!--<p>{{ keywordsList }}</p>
             <p>{{ keywordSelection }}</p>
-            <p>{{ pertinentKeywords(subjectSelection) }}</p>
+            <p>{{ pertinentKeywords(subjectSelection) }}</p>-->
+        </div>
+    </form>
+    <form action="" name="newQuizForm" ng-hide="keywordChecked" ng-show="-keywordChecked">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Quiz</h3>
+            </div>
+            <div class="panel-body">
+                <label for="stem">Stem</label>
+                <div class="form-group">
+                    <input required ng-pattern="/.{3}/" id="stem" type="text" class="form-control" placeholder="Type the stem of your quiz...">
+                </div>
+                <label for="truthy">True</label>
+                <div class="input-group">
+                    <input type="text" id="truthy" ng-model="newTruthy" class="form-control" placeholder="Type truthy...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="addNewTruthy(newTruthy)">Add</button>
+                    </span>
+                </div>
+                <ul class="list-group">
+                    <li ng-repeat="truthy in truthies" class="list-group-item">{{ truthy }}</li>
+                </ul>
+                <label for="falsy">False</label>
+                <div class="input-group">
+                    <input type="text" id="falsy" ng-model="newFalsy" class="form-control" placeholder="Type falsy...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="addNewFalsy(newFalsy)">Add</button>
+                    </span>
+                </div>
+                <ul class="list-group">
+                    <li ng-repeat="falsy in falsies" class="list-group-item">{{ falsy }}</li>
+                </ul>
+            </div>
+            <!--<p>{{ truthies }}</p>-->
+            <!--<p>{{ keywordsList }}</p>
+            <p>{{ keywordSelection }}</p>
+            <p>{{ pertinentKeywords(subjectSelection) }}</p>-->
         </div>
     </form>
 </div>

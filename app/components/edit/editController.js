@@ -5,11 +5,15 @@
         .controller('editController', function ($scope, $log, subjects, keywords, quizes) {
             $scope.subjectSelection = [];
             $scope.keywordSelection = [];
+            $scope.falsies = [];
+            $scope.truthies = [];
             $scope.subjectsList = subjects.list;
             $scope.keywordsList = keywords.list;
             $scope.quizesList = quizes.list;
             $scope.subjectChecked = $scope.subjectSelection.length === 0;
+            $scope.keywordChecked = $scope.keywordSelection.length === 0;
             $scope.pertinentKeywords = keywords.pertinentKeywords;
+
 
 
 
@@ -33,6 +37,7 @@
                 else {
                     $scope.keywordSelection.push(keywordName);
                 }
+                $scope.keywordChecked = $scope.keywordSelection.length === 0;
             };
 
 
@@ -51,6 +56,8 @@
             };
 
             $scope.addNewKeyword = function () {
+                var subjectSelection = [];
+                $scope.subjectSelection.forEach(function (subject) { return subjectSelection.push(subject); });
                 var exists = keywords.list.some(function (keywordObj) { return keywordObj.name === $scope.newKeywordName; });
 
                 if ($scope.newKeywordForm.$valid && !exists) {
@@ -58,7 +65,7 @@
                     keywords.list.push(
                         {
                             name: $scope.newKeywordName,
-                            subjects: $scope.subjectSelection
+                            subjects: subjectSelection
                         });
                     $scope.newKeywordName = '';
                 }
@@ -67,7 +74,15 @@
                 }
             };
 
+            $scope.addNewTruthy = function (truthy) {
+                $scope.truthies.push(truthy);
+                $scope.newTruthy = '';
+            };
 
+            $scope.addNewFalsy = function (falsy) {
+                $scope.falsies.push(falsy);
+                $scope.newFalsy = '';
+            };
 
 
         }); // END OF CONTROLLER 'editController.js'
