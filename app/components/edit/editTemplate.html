@@ -54,7 +54,7 @@
                         <!--THIS IS THE STEM FORM-->
                         <label for="stem">Stem</label>
                         <div class="form-group">
-                            <input required ng-pattern="/.{3}/" ng-model="newStem" id="stem" type="text" class="form-control" placeholder="Type the stem of your quiz...">
+                            <input ng-model="newStem" id="stem" type="text" class="form-control" placeholder="Type the stem of your quiz...">
                         </div>
                         <br>
                         <!--THIS IS THE TRUTHY FORM-->
@@ -96,7 +96,7 @@
         </div>
     </div>
 </div>
-<p>subjectsList {{ subjectsList }}</p>
+<!--<p>subjectsList {{ subjectsList }}</p>
 <p>subjectSelection {{ subjectSelection }}</p>
 <p>keywordSelection {{ keywordSelection }}</p>
 <p>subjectChecked {{ subjectChecked }}</p>
@@ -106,7 +106,7 @@
 <p>truthies {{ truthies }}</p>
 <p>truthies {{ truthies }}</p>
 <p>falsies {{ falsies }}</p>
-<p>newStem {{ newStem }}</p>
+<p>newStem {{ newStem }}</p>-->
 <ul>
     <li ng-repeat="quiz in quizesList">QUIZ {{ quiz }}</li>
 </ul>

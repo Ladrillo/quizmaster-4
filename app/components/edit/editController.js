@@ -131,7 +131,7 @@
             };
 
             $scope.quizFormAdecuate = function () {
-                return $scope.truthies.length > 0 && $scope.falsies.length > 0 && $scope.newStem.length > 0;
+                return ($scope.truthies.length > 0) && ($scope.falsies.length > 0) && ($scope.newStem.length >= 3);
             };
 
 
