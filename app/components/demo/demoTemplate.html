@@ -1,4 +1,9 @@
 <div class="container">
-    <p>This is the Demo Template</p>
-    <p>Test Data: {{ test }}</p>
+    <div class="well">
+        <div ng-repeat="quiz in quizesList">
+            <h3>{{ quiz.keywords[0].subjects[0] }}</h3>
+
+
+        </div>
+    </div>
 </div>

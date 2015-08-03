@@ -3,7 +3,7 @@
 
     angular.module('quizMaster')
         .controller('editController', function ($scope, $log, subjects, keywords, quizes) {
-            $scope.subjectSelection = [];
+            $scope.subjectSelection = "";
             $scope.keywordSelection = [];
             $scope.newStem = "";
             $scope.falsies = [];
@@ -16,25 +16,24 @@
 
             // HERE WE HAVE THE FUNCTIONS THAT 'GET' THE CHECKED SUBJECTS AND KEYWORDS
             function checkChecked() {
-                $scope.subjectChecked = $scope.subjectSelection.length !== 0;
-                $scope.bothChecked = $scope.subjectSelection.length !== 0 && $scope.keywordSelection.length !== 0;
+                $scope.subjectChecked = $scope.subjectSelection !== "";
+                $scope.bothChecked = $scope.subjectSelection !== "" && $scope.keywordSelection.length !== 0;
             }
 
             function resetKeywordsForm() {
-                if ($scope.subjectSelection.length === 0) $scope.keywordSelection = [];
+                if ($scope.subjectSelection === "") $scope.keywordSelection = [];
             }
 
             $scope.noSubject = function () {
-                return $scope.subjectSelection.length === 0;
+                return $scope.subjectSelection === "";
             };
 
             $scope.toggleSubjectSelection = function (subjectName) {
-                var idx = $scope.subjectSelection.indexOf(subjectName);
-                if (idx > -1) {
-                    $scope.subjectSelection.splice(idx, 1);
+                if ($scope.subjectSelection) {
+                    $scope.subjectSelection = "";
                 }
                 else {
-                    $scope.subjectSelection.push(subjectName);
+                    $scope.subjectSelection = subjectName;
                 }
                 checkChecked();
                 resetKeywordsForm();
@@ -68,17 +67,15 @@
             };
 
             $scope.addNewKeyword = function () {
-                var subjectSelection = [];
-                $scope.subjectSelection.forEach(function (subject) { return subjectSelection.push(subject); });
                 var exists = keywords.list.some(function (kwrd) {
-                    return kwrd.name === $scope.newKeywordName && kwrd.subject === $scope.subjectSelection[0]; });
+                    return kwrd.name === $scope.newKeywordName && kwrd.subject === $scope.subjectSelection; });
 
                 if ($scope.newKeywordForm.$valid && !exists) {
                     $log.info('Form is valid');
                     keywords.list.push(
                         {
                             name: $scope.newKeywordName,
-                            subject: subjectSelection[0]
+                            subject: $scope.subjectSelection
                         });
                     $scope.newKeywordName = '';
                 }
@@ -114,8 +111,8 @@
                 quizes.list.push(
                     {
                         stem: $scope.newStem,
-                        truthy: $scope.truthies,
-                        falsey: $scope.falsies,
+                        truthies: $scope.truthies,
+                        falsies: $scope.falsies,
                         keywords: getRealKeywords($scope.keywordSelection)
                     });
                 $scope.truthies = [];

@@ -10,7 +10,7 @@
                     <div class="panel-body">
                         <div ng-repeat="subject in subjectsList" class="checkbox">
                             <label>
-                                <input ng-disabled="subjectSelection[0] && subjectSelection[0] !== subject" id="{{ subject }}" type="checkbox" ng-click="toggleSubjectSelection(subject)"
+                                <input ng-disabled="subjectSelection && subjectSelection !== subject" id="{{ subject }}" type="checkbox" ng-click="toggleSubjectSelection(subject)"
                                 value="">{{ subject }}</label>
                         </div>
                         <!--this is the new subject form-->
@@ -29,9 +29,10 @@
                         <h3 class="panel-title">Keywords</h3>
                     </div>
                     <div class="panel-body">
-                        <div ng-repeat="keyword in keywordsList" class="checkbox" ng-show="keyword.subject ===subjectSelection[0]">
+                        <div ng-repeat="keyword in keywordsList" class="checkbox" ng-show="keyword.subject === subjectSelection">
                             <label>
-                                <input id="{{ keyword.name }}" type="checkbox" ng-checked="noSubject()" ng-click="toggleKeywordSelection(keyword.name)" value="">{{ keyword.name }}</label>
+                                <input id="{{ keyword.name }}" type="checkbox" ng-checked="noSubject()" ng-click="toggleKeywordSelection(keyword.name)"
+                                value="">{{ keyword.name }}</label>
                         </div>
                         <!--this is the new keyword form-->
                         <label for="keywords-list">Don't see what you need?</label>
@@ -102,11 +103,27 @@
 <p>subjectChecked {{ subjectChecked }}</p>
 <p>bothChecked {{ bothChecked }}</p>
 <p>keywordsList {{ keywordsList }}</p>
-<p>pertinentKeywords(subjectSelection) {{ pertinentKeywords(subjectSelection) }}</p>
 <p>truthies {{ truthies }}</p>
 <p>truthies {{ truthies }}</p>
 <p>falsies {{ falsies }}</p>
 <p>newStem {{ newStem }}</p>-->
-<!--<ul>
-    <li ng-repeat="quiz in quizesList">QUIZ {{ quiz }}</li>
-</ul>-->
+<div ng-repeat="quiz in quizesList">
+    <h3>{{ quiz.stem }}</h3>
+    <ul>
+        <li>truthies:
+            <ul ng-repeat="truthy in quiz.truthies">
+                <li>{{ truthy }}</li>
+            </ul>
+        </li>
+        <li>falsies:
+            <ul ng-repeat="falsy in quiz.falsies">
+                <li>{{ falsy }}</li>
+            </ul>
+        </li>
+        <li>keywords:
+            <ul ng-repeat="keyword in quiz.keywords">
+                <li>{{ keyword }}</li>
+            </ul>
+        </li>
+    </ul>
+</div>
