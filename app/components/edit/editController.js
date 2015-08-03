@@ -5,19 +5,29 @@
         .controller('editController', function ($scope, $log, subjects, keywords, quizes) {
             $scope.subjectSelection = [];
             $scope.keywordSelection = [];
+            $scope.newStem = "";
             $scope.falsies = [];
             $scope.truthies = [];
             $scope.subjectsList = subjects.list;
             $scope.keywordsList = keywords.list;
             $scope.quizesList = quizes.list;
-            $scope.subjectChecked = $scope.subjectSelection.length === 0;
-            $scope.keywordChecked = $scope.keywordSelection.length === 0;
-            $scope.pertinentKeywords = keywords.pertinentKeywords;
-
 
 
 
             // HERE WE HAVE THE FUNCTIONS THAT 'GET' THE CHECKED SUBJECTS AND KEYWORDS
+            function checkChecked() {
+                $scope.subjectChecked = $scope.subjectSelection.length !== 0;
+                $scope.bothChecked = $scope.subjectSelection.length !== 0 && $scope.keywordSelection.length !== 0;
+            }
+
+            function resetKeywordsForm() {
+                if ($scope.subjectSelection.length === 0) $scope.keywordSelection = [];
+            }
+
+            $scope.noSubject = function () {
+                return $scope.subjectSelection.length === 0;
+            };
+
             $scope.toggleSubjectSelection = function (subjectName) {
                 var idx = $scope.subjectSelection.indexOf(subjectName);
                 if (idx > -1) {
@@ -26,7 +36,8 @@
                 else {
                     $scope.subjectSelection.push(subjectName);
                 }
-                $scope.subjectChecked = $scope.subjectSelection.length === 0;
+                checkChecked();
+                resetKeywordsForm();
             };
 
             $scope.toggleKeywordSelection = function (keywordName) {
@@ -37,8 +48,9 @@
                 else {
                     $scope.keywordSelection.push(keywordName);
                 }
-                $scope.keywordChecked = $scope.keywordSelection.length === 0;
+                checkChecked();
             };
+
 
 
             // HERE ARE THE FUNCTIONS THAT DEAL WITH ADDING NEW SUBJECTS AND KEYWORDS
@@ -58,14 +70,15 @@
             $scope.addNewKeyword = function () {
                 var subjectSelection = [];
                 $scope.subjectSelection.forEach(function (subject) { return subjectSelection.push(subject); });
-                var exists = keywords.list.some(function (keywordObj) { return keywordObj.name === $scope.newKeywordName; });
+                var exists = keywords.list.some(function (kwrd) {
+                    return kwrd.name === $scope.newKeywordName && kwrd.subject === $scope.subjectSelection[0]; });
 
                 if ($scope.newKeywordForm.$valid && !exists) {
                     $log.info('Form is valid');
                     keywords.list.push(
                         {
                             name: $scope.newKeywordName,
-                            subjects: subjectSelection
+                            subject: subjectSelection[0]
                         });
                     $scope.newKeywordName = '';
                 }
@@ -74,55 +87,55 @@
                 }
             };
 
+
+
+            // HERE ARE THE FUNCTIONS THAT DEAL WITH ADDING THE NEW QUIZ TO THE SERVICE
             $scope.addNewTruthy = function (truthy) {
-                $scope.truthies.push(truthy);
-                $scope.newTruthy = '';
+                if ($scope.truthies.indexOf(truthy) === -1 && truthy.length >= 3) {
+                    $scope.truthies.push(truthy);
+                    $scope.newTruthy = '';
+                }
             };
 
             $scope.addNewFalsy = function (falsy) {
-                $scope.falsies.push(falsy);
-                $scope.newFalsy = '';
+                if ($scope.falsies.indexOf(falsy) === -1 && falsy.length >= 3) {
+                    $scope.falsies.push(falsy);
+                    $scope.newFalsy = '';
+                }
+            };
+
+            var getRealKeywords = function (keywordsArray) {
+                return keywords.list.filter(function (kw) {
+                    return keywordsArray.indexOf(kw.name) !== -1;
+                });
             };
 
             $scope.addNewQuiz = function () {
-                $scope.keywordSelection.forEach(function (keyword) {
-                    quizes.list.push(
-                        {
-                            stem: ,
-                            truthy: ,
-                            falsey: ,
-                            keywords: [
-                                
-
-
-
-                            ]
-                        });
-
-
-                });
+                quizes.list.push(
+                    {
+                        stem: $scope.newStem,
+                        truthy: $scope.truthies,
+                        falsey: $scope.falsies,
+                        keywords: getRealKeywords($scope.keywordSelection)
+                    });
+                $scope.truthies = [];
+                $scope.falsies = [];
+                $scope.newStem = "";
             };
-// [
-//                 {
-//                     stem: "Javascript...",
-//                     truthy: ["rocks!", "has function scope."],
-//                     falsey: ["is class-based.", "has block scope."],
-//                     keywords: [
-//                         {
-//                             name: "JavaScript",
-//                             subjects: ["Computer Science"]
-//                         },
-//                         {
-//                             name: "this",
-//                             subjects: ["Computer Science"]
-//                         },
-//                         {
-//                             name: "Closures",
-//                             subjects: ["Computer Science"]
-//                         }]
-//
-//
-                });
+
+
+
+            // HERE WE SET THE CONDITIONS TO DISABLE THE CREATE QUIZ BUTTON
+            $scope.stemFieldAdecuate = function () {
+                return !!$scope.newStem;
+            };
+
+            $scope.quizFormAdecuate = function () {
+                return $scope.truthies.length > 0 && $scope.falsies.length > 0 && $scope.newStem.length > 0;
+            };
+
+
 
         // END OF CONTROLLER 'editController.js'
+        });
 } ());

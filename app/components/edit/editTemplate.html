@@ -1,87 +1,112 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
+            <!--THIS IS THE SUBJECTS FORM-->
             <form action="" name="newSubjectForm">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Subject</h3>
+                        <h3 class="panel-title">Subjects</h3>
                     </div>
                     <div class="panel-body">
                         <div ng-repeat="subject in subjectsList" class="checkbox">
                             <label>
-                                <input id="{{ subject }}" type="checkbox" ng-click="toggleSubjectSelection(subject)" value="{{ subject }}">{{ subject }}</label>
+                                <input ng-disabled="subjectSelection[0] && subjectSelection[0] !== subject" id="{{ subject }}" type="checkbox" ng-click="toggleSubjectSelection(subject)"
+                                value="">{{ subject }}</label>
                         </div>
+                        <!--this is the new subject form-->
                         <label for="subjects-list">Don't see what you need?</label>
                         <div class="form-group">
                             <input required ng-pattern="/.{3}/" ng-model="newSubjectName" id="subjects-list" type="text" class="form-control" placeholder="Type name of new subject...">
                         </div>
-                        <button ng-disabled="newSubjectForm.$invalid" type="submit" class="btn btn-danger" ng-click="addNewSubject()">Create New!</button>
+                        <button ng-disabled="newSubjectForm.$invalid" type="submit" class="btn btn-danger" ng-click="addNewSubject()">Create New Subject</button>
                     </div>
-                    <!--<p>{{ subjectsList }}</p>
-                    <p>{{ subjectSelection }}</p>-->
                 </div>
             </form>
-            <form action="" name="newKeywordForm" ng-hide="subjectChecked" ng-show="-subjectChecked">
+            <!--THIS IS THE KEYWORDS FORMS-->
+            <form action="" name="newKeywordForm" ng-show="subjectChecked">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Keyword</h3>
+                        <h3 class="panel-title">Keywords</h3>
                     </div>
                     <div class="panel-body">
-                        <div ng-repeat="keyword in pertinentKeywords(subjectSelection)" class="checkbox">
+                        <div ng-repeat="keyword in keywordsList" class="checkbox" ng-show="keyword.subject ===subjectSelection[0]">
                             <label>
-                                <input id="{{ keyword.name }}" type="checkbox" ng-click="toggleKeywordSelection(keyword.name)" value="{{ keyword.name }}">{{ keyword.name }}</label>
+                                <input id="{{ keyword.name }}" type="checkbox" ng-checked="noSubject()" ng-click="toggleKeywordSelection(keyword.name)" value="">{{ keyword.name }}</label>
                         </div>
+                        <!--this is the new keyword form-->
                         <label for="keywords-list">Don't see what you need?</label>
                         <div class="form-group">
                             <input required ng-pattern="/.{3}/" ng-model="newKeywordName" id="keywords-list" type="text" class="form-control" placeholder="Type name of new keyword...">
                         </div>
-                        <button ng-disabled="newKeywordForm.$invalid" type="submit" class="btn btn-danger" ng-click="addNewKeyword()">Create New!</button>
+                        <button ng-disabled="newKeywordForm.$invalid" type="submit" class="btn btn-danger" ng-click="addNewKeyword()">Create New Keyword</button>
                     </div>
-                    <!--<p>{{ keywordsList }}</p>
-                    <p>{{ keywordSelection }}</p>
-                    <p>{{ pertinentKeywords(subjectSelection) }}</p>-->
                 </div>
             </form>
         </div>
         <div class="col-md-6">
-            <form action="" name="newQuizForm" ng-hide="keywordChecked" ng-show="-keywordChecked">
+            <!--THIS IS THE QUIZES FORM-->
+            <form action="" name="newQuizForm" ng-show="bothChecked">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Quiz</h3>
                     </div>
                     <div class="panel-body">
+                        <!--THIS IS THE STEM FORM-->
                         <label for="stem">Stem</label>
                         <div class="form-group">
-                            <input required ng-pattern="/.{3}/" id="stem" type="text" class="form-control" placeholder="Type the stem of your quiz...">
+                            <input required ng-pattern="/.{3}/" ng-model="newStem" id="stem" type="text" class="form-control" placeholder="Type the stem of your quiz...">
                         </div>
-                        <label for="truthy">True</label>
-                        <div class="input-group">
-                            <input type="text" id="truthy" ng-model="newTruthy" class="form-control" placeholder="Type truthy...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" ng-click="addNewTruthy(newTruthy)">Add</button>
-                            </span>
-                        </div>
+                        <br>
+                        <!--THIS IS THE TRUTHY FORM-->
+                        <form action="">
+                            <label for="truthyId">True</label>
+                            <div class="input-group">
+                                <input type="text" ng-model="newTruthy" class="form-control" placeholder="Type truthy stuff...">
+                                <span class="input-group-btn">
+                                    <input id="truthyId" required ng-pattern="/.{3}/" ng-disabled="!stemFieldAdecuate()" class="btn btn-default" type="submit"
+                                    value="Add" ng-click="addNewTruthy(newTruthy)">
+                                </span>
+                            </div>
+                        </form>
+                        <br>
+                        <!--the rg-repeat for the truthies-->
                         <ul class="list-group">
                             <li ng-repeat="truthy in truthies" class="truthy list-group-item">{{ truthy }}</li>
                         </ul>
-                        <label for="falsy">False</label>
-                        <div class="input-group">
-                            <input type="text" id="falsy" ng-model="newFalsy" class="form-control" placeholder="Type falsy...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" ng-click="addNewFalsy(newFalsy)">Add</button>
-                            </span>
-                        </div>
+                        <!--THIS IS THE FALSY FORM-->
+                        <form action="">
+                            <label for="falsyId">False</label>
+                            <div class="input-group">
+                                <input type="text" ng-model="newFalsy" class="form-control" placeholder="Type falsy stuff...">
+                                <span class="input-group-btn">
+                                    <input id="falsyId" required ng-pattern="/.{3}/" ng-disabled="!stemFieldAdecuate()" class="btn btn-default" type="submit"
+                                    value="Add" ng-click="addNewFalsy(newFalsy)">
+                                </span>
+                            </div>
+                        </form>
+                        <br>
+                        <!--the ng-repeat for the falsies-->
                         <ul class="list-group">
                             <li ng-repeat="falsy in falsies" class="falsy list-group-item">{{ falsy }}</li>
                         </ul>
-                        <button ng-disabled="newQuizForm.$invalid" type="submit" class="btn btn-danger" ng-click="addNewQuiz()">Create New!</button>
+                        <button ng-disabled="!quizFormAdecuate()" type="submit" class="btn btn-danger" ng-click="addNewQuiz()">Create New Quiz!</button>
                     </div>
-                    <p>{{ truthies }}</p>
-                    <p>{{ keywordsList }}</p>
-                    <p>{{ keywordSelection }}</p>
-                    <p>{{ pertinentKeywords(subjectSelection) }}</p>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<p>subjectsList {{ subjectsList }}</p>
+<p>subjectSelection {{ subjectSelection }}</p>
+<p>keywordSelection {{ keywordSelection }}</p>
+<p>subjectChecked {{ subjectChecked }}</p>
+<p>bothChecked {{ bothChecked }}</p>
+<p>keywordsList {{ keywordsList }}</p>
+<p>pertinentKeywords(subjectSelection) {{ pertinentKeywords(subjectSelection) }}</p>
+<p>truthies {{ truthies }}</p>
+<p>truthies {{ truthies }}</p>
+<p>falsies {{ falsies }}</p>
+<p>newStem {{ newStem }}</p>
+<ul>
+    <li ng-repeat="quiz in quizesList">QUIZ {{ quiz }}</li>
+</ul>

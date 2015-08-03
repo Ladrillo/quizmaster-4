@@ -2,7 +2,7 @@
     "use strict";
 
     angular.module('quizMaster')
-        .controller('homeController', function ($scope) {
+        .controller('demoController', function ($scope) {
             $scope.test = "test";
         });
 

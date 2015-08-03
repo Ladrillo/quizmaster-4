@@ -3,13 +3,13 @@
 
     angular.module('quizMaster')
         .config(function ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise('/edit');
+            // $urlRouterProvider.otherwise('/edit');
 
             $stateProvider
-                .state('home', {
-                    url: '/home',
-                    templateUrl: 'components/home/homeTemplate.html',
-                    controller: 'homeController'
+                .state('demo', {
+                    url: '/demo',
+                    templateUrl: 'components/demo/demoTemplate.html',
+                    controller: 'demoController'
                 })
                 .state('edit', {
                     url: '/edit',
