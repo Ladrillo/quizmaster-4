@@ -1,9 +1,17 @@
 <div class="container">
-    <div class="well">
-        <div ng-repeat="quiz in quizesList">
-            <h3>{{ quiz.keywords[0].subjects[0] }}</h3>
-
-
+    <p>{{ selectedAnswers }}</p>
+    <div ng-repeat="quiz in quizesList" class="well">
+        <h3>{{ quiz.keywords[0].subject }}</h3>
+        <p>Select all the statements that are true. No credit for partial answers.</p>
+        <div class="well answers">
+            <h4>{{ quiz.stem }}</h4>
+            <br>
+            <div class="btn-group-vertical">
+                <button ng-class="isAnswerSelected(answer) ? 'btn btn-default' : 'btn btn-primary'" ng-repeat="answer in quiz.shuffledAnswers"
+                ng-click="updateSelection(answer)" type="button" class="btn btn-default">{{ $index + 1 }}- {{ answer }}</button>
+                <button ng-class="allFalseClicked ? 'btn btn-primary' : 'btn btn-default'"
+                class="btn btn-default" ng-click="allFalse()" type="button">All statements are false!</button>
+            </div>
         </div>
     </div>
 </div>

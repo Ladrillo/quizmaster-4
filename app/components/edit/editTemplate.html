@@ -107,23 +107,25 @@
 <p>truthies {{ truthies }}</p>
 <p>falsies {{ falsies }}</p>
 <p>newStem {{ newStem }}</p>-->
-<div ng-repeat="quiz in quizesList">
-    <h3>{{ quiz.stem }}</h3>
-    <ul>
-        <li>truthies:
-            <ul ng-repeat="truthy in quiz.truthies">
-                <li>{{ truthy }}</li>
-            </ul>
-        </li>
-        <li>falsies:
-            <ul ng-repeat="falsy in quiz.falsies">
-                <li>{{ falsy }}</li>
-            </ul>
-        </li>
-        <li>keywords:
-            <ul ng-repeat="keyword in quiz.keywords">
-                <li>{{ keyword }}</li>
-            </ul>
-        </li>
-    </ul>
-</div>
+<!--<div class="container">
+    <div ng-repeat="quiz in quizesList" class="well">
+        <h3>{{ quiz.stem }}</h3>
+        <ul>
+            <li>truthies:
+                <ul ng-repeat="truthy in quiz.truthies">
+                    <li>{{ truthy }}</li>
+                </ul>
+            </li>
+            <li>falsies:
+                <ul ng-repeat="falsy in quiz.falsies">
+                    <li>{{ falsy }}</li>
+                </ul>
+            </li>
+            <li>keywords:
+                <ul ng-repeat="keyword in quiz.keywords">
+                    <li>{{ keyword }}</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>-->
