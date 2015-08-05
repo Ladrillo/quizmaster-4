@@ -10,8 +10,8 @@
                     <div class="panel-body">
                         <div ng-repeat="subject in subjectsList" class="checkbox">
                             <label>
-                                <input ng-disabled="subjectSelection && subjectSelection !== subject" id="{{ subject }}" type="checkbox" ng-click="toggleSubjectSelection(subject)"
-                                value="">{{ subject }}</label>
+                                <input ng-disabled="subjectSelection && subjectSelection !== subject" id="{{ subject.name }}" type="checkbox" ng-click="toggleSubjectSelection(subject)"
+                                value="">{{ subject.name }}</label>
                         </div>
                         <!--this is the new subject form-->
                         <label for="subjects-list">Don't see what you need?</label>
@@ -23,13 +23,14 @@
                 </div>
             </form>
             <!--THIS IS THE KEYWORDS FORMS-->
+            <!--ng-show="keyword.subject.name === subjectSelection" INSERT THIS LINE-->
             <form action="" name="newKeywordForm" ng-show="subjectChecked">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Keywords</h3>
                     </div>
                     <div class="panel-body">
-                        <div ng-repeat="keyword in keywordsList" class="checkbox" ng-show="keyword.subject === subjectSelection">
+                        <div ng-repeat="keyword in keywordsList" class="checkbox">
                             <label>
                                 <input id="{{ keyword.name }}" type="checkbox" ng-checked="noSubject()" ng-click="toggleKeywordSelection(keyword.name)"
                                 value="">{{ keyword.name }}</label>

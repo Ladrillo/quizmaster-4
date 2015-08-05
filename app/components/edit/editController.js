@@ -2,19 +2,35 @@
     "use strict";
 
     angular.module('quizMaster')
-        .controller('editController', function ($scope, $log, subjects, keywords, quizes) {
+        .controller('editController', function (
+            $scope,
+            $log,
+            // services:
+            subjects,
+            keywords,
+            quizes,
+            // resolved in router:
+            subjectsList,
+            subjectSubmit,
+            keywordsList,
+            keywordSubmit,
+            quizesList,
+            quizSubmit
+            // end of injected dependencies
+            ) {
+            // we put our injected resolved items into scope:
+            $scope.subjectsList = subjectsList;
+            $scope.subjectSubmit = subjectSubmit;
+            $scope.keywordsList = keywordsList;
+            $scope.keywordSubmit = keywordSubmit;
+            $scope.quizesList = quizesList;
+            $scope.quizSubmit = quizSubmit;
+            // initialazing sane values
             $scope.subjectSelection = "";
             $scope.keywordSelection = [];
             $scope.newStem = "";
             $scope.falsies = [];
             $scope.truthies = [];
-            $scope.subjectsList = subjects.list;
-            $scope.keywordsList = keywords.list;
-            $scope.quizesList = quizes.list;
-            // firebase method from quizes service:
-            $scope.submitQuiz = quizes.submitQuiz;
-
-
 
 
             // HERE WE HAVE THE FUNCTIONS THAT 'GET' THE CHECKED SUBJECTS AND KEYWORDS
@@ -61,7 +77,7 @@
 
                 if ($scope.newSubjectForm.$valid && !exists) {
                     $log.info('Form is valid');
-                    subjects.list.push($scope.newSubjectName);
+                    subjectSubmit({name: $scope.newSubjectName});
                     $scope.newSubjectName = '';
                 }
                 else {
@@ -75,7 +91,7 @@
 
                 if ($scope.newKeywordForm.$valid && !exists) {
                     $log.info('Form is valid');
-                    keywords.list.push(
+                    keywordSubmit(
                         {
                             name: $scope.newKeywordName,
                             subject: $scope.subjectSelection
@@ -118,8 +134,8 @@
             };
 
             $scope.addNewQuiz = function () {
-                // testing firebase, using submitQuiz() that comes from quizes service
-                this.submitQuiz({
+                // testing firebase, using quizSubmit() that comes from routing
+                quizSubmit({
                         stem: $scope.newStem,
                         truthies: $scope.truthies,
                         falsies: $scope.falsies,
@@ -142,6 +158,16 @@
             };
 
 
+            // randomizing helper function
+            function shuffleArray(array) {
+                for (var i = array.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+                return array;
+            }
 
         // END OF CONTROLLER 'editController.js'
         });
