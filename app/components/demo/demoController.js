@@ -12,8 +12,8 @@
                 $scope.test = {};
 
                 // we grab the quizes, from a service
-                $scope.quizesList = quizes.list;
-
+                // $scope.quizesList = quizes.list;
+                $scope.quizesList = quizes.quizes;
                 // create a shuffled set of to-do quizes
                 $scope.test.toDoQuizes = (function () {
                     return shuffleArray($scope.quizesList);
@@ -145,7 +145,7 @@
             // $scope.getPrintObject = function (object) {
             //     return JSON.stringify(object);
             // };
-            
+
             // console.log($scope.getPrintObject($scope.test));
             console.log($scope.test);
 

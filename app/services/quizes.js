@@ -2,7 +2,7 @@
     "use strict";
 
     angular.module('quizMaster')
-        .service('quizes', function () {
+        .service('quizes', function ($firebaseArray, $firebaseObject) {
             this.list = [
                 {
                     stem: "Javascript...",
@@ -37,6 +37,22 @@
                         }]
                 }
             ];
+
+            // experimenting with Firebase
+            var firebaseRoot = "https://quizmaster-4.firebaseio.com/";
+            var ref = new Firebase(firebaseRoot + "/quizes");
+            var quizes = $firebaseArray(ref);
+
+            this.quizes = quizes;
+            this.submitQuiz = function (quiz) {
+                quizes.$add(quiz);
+            };
+
+            console.log(quizes);
+
+
+
+
         });
 
 
