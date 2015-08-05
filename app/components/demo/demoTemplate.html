@@ -1,19 +1,37 @@
-<!--<div class="container">
-    <p>{{ selectedAnswers }}</p>
-    <div ng-repeat="quiz in quizesList" class="well">
-        <h3>{{ quiz.keywords[0].subject }}</h3>
+<div class="container">
+    <div ng-repeat="quiz in test.toDoQuizes" class="well container" ng-show="$index === test.currentQuizIndex">
+        <div class="quiz-header">
+            <h3>{{ quiz.keywords[0].subject }}</h3>
+            <p>
+                <span class="badge">{{ $index + 1 }}</span> of {{ test.toDoQuizes.length }}</p>
+        </div>
         <p>Select all the statements that are true. No credit for partial answers.</p>
-        <div class="well answers">
+        <div class="well answers ">
             <h4>{{ quiz.stem }}</h4>
             <br>
+            <!--<p>selected answers: {{ quiz.selectedAnswers }}</p>
+            <p>selection correct: {{ quiz.isSelectionCorrect() }}</p>-->
             <div class="btn-group-vertical">
-                <button ng-class="isAnswerSelected(answer) ? 'btn btn-default' : 'btn btn-primary'" ng-repeat="answer in quiz.shuffledAnswers"
-                ng-click="updateSelection(answer)" type="button" class="btn btn-default">{{ $index + 1 }}- {{ answer }}</button>
-                <button ng-class="allFalseClicked ? 'btn btn-primary' : 'btn btn-default'"
-                class="btn btn-default" ng-click="allFalse()" type="button">All statements are false!</button>
+                <button ng-disabled="quiz.submitted" ng-class="quiz.isAnswerSelected(answer) ? 'btn btn-default' : 'btn btn-primary'" ng-repeat="answer in quiz.shuffledAnswers"
+                ng-click="quiz.updateSelection(answer)" type="button" class="btn btn-default">{{ $index + 1 }}- {{ answer }}</button>
+                <button ng-disabled="quiz.submitted" ng-class="quiz.allFalseClicked ? 'btn btn-primary' : 'btn btn-default'"
+                class="btn btn-default" ng-click="quiz.allFalse()" type="button">All statements are false!</button>
+            </div>
+            <div class="next-or-submit-div">
+                <div class="next-or-submit-buttons">
+                    <ul class="list-inline">
+                        <li>
+                            <h3>{{ quiz.feedback }}</h3>
+                        </li>
+                        <li>{{ quiz.sarcasm }}</li>
+                    </ul>
+                </div>
+                <div class="btn-group next-or-submit-buttons" role="group">
+                    <button ng-hide="quiz.submitted" ng-click="quiz.submit()" type="button" class="btn btn-warning">Submit</button>
+                    <button ng-click="test.updateCurrentQuiz()" type="button" class="btn btn-default">Next</button>
+                </div>
             </div>
         </div>
     </div>
-</div>-->
-
-<p>{{ test }}</p>
+</div>
+<!--<p>{{ test }}</p>-->

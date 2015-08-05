@@ -6,7 +6,7 @@
             this.list = [
                 {
                     stem: "Javascript...",
-                    truthies: ["rocks!", "has function scope."],
+                    truthies: ["supports objects.", "has function scope."],
                     falsies: ["is class-based.", "has block scope."],
                     keywords: [
                         {
@@ -23,17 +23,17 @@
                         }]
                 },
                 {
-                    stem: "The present perfect...",
-                    truthies: ["is used to talk about a present situation or condition.", "uses 'have' or 'has' as auxiliary verbs."],
-                    falsies: ["is used to tell stories about the past", "uses 'had' as an auxiliary verb."],
+                    stem: "Firebase...",
+                    truthies: ["performs better with shallow data structures.", "supports easy authentication of users."],
+                    falsies: ["is generally used for larger projects.", "Currently lacks web-sockets support."],
                     keywords: [
                         {
-                            name: "Present Perfect",
-                            subject: "English as a Foreign Language"
+                            name: "Firebase",
+                            subject: "Computer Science"
                         },
                         {
-                            name: "The tense system",
-                            subject: "English as a Foreign Language"
+                            name: "Databases",
+                            subject: "Computer Science"
                         }]
                 }
             ];

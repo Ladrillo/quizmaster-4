@@ -20,5 +20,20 @@ div.answers {
 
 .btn {
     text-align: left;
-    white-space: normal; 
+    white-space: normal;
+}
+
+.next-or-submit-div {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+}
+
+.next-or-submit-buttons {
+    align-self: flex-end;
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
 }
