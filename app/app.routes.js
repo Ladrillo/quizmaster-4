@@ -9,7 +9,18 @@
                 .state('demo', {
                     url: '/demo',
                     templateUrl: 'components/demo/demoTemplate.html',
-                    controller: 'demoController'
+                    controller: 'demoController',
+                    resolve: {
+                        quizesList: function ($firebase, $firebaseArray, $firebaseObject) {
+                            var firebaseRoot = "https://quizmaster-4.firebaseio.com/";
+                            var ref = new Firebase(firebaseRoot + "/quizes");
+                            var quizes = $firebaseArray(ref);
+                            return quizes.$loaded()
+                                .then(function (data) {
+                                    return data;
+                                });
+                        }
+                    }
                 })
                 .state('edit', {
                     url: '/edit',

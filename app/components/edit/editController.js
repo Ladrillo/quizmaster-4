@@ -11,7 +11,7 @@
             $scope.subjectsList = subjects.list;
             $scope.keywordsList = keywords.list;
             $scope.quizesList = quizes.list;
-            // trying to make firebase work:
+            // firebase method from quizes service:
             $scope.submitQuiz = quizes.submitQuiz;
 
 
@@ -89,7 +89,7 @@
 
 
 
-            // HERE ARE THE FUNCTIONS THAT DEAL WITH ADDING THE NEW QUIZ TO THE SERVICE
+            // HERE ARE THE FUNCTIONS THAT DEAL WITH ADDING THE NEW QUIZ TO FIREBASE
             $scope.addNewTruthy = function (truthy) {
                 if ($scope.truthies.indexOf(truthy) === -1 && truthy.length >= 1) {
                     $scope.truthies.push(truthy);
@@ -118,16 +118,8 @@
             };
 
             $scope.addNewQuiz = function () {
-                // testing firebase:
+                // testing firebase, using submitQuiz() that comes from quizes service
                 this.submitQuiz({
-                        stem: $scope.newStem,
-                        truthies: $scope.truthies,
-                        falsies: $scope.falsies,
-                        keywords: getRealKeywords($scope.keywordSelection)
-                    });
-
-                quizes.list.push(
-                    {
                         stem: $scope.newStem,
                         truthies: $scope.truthies,
                         falsies: $scope.falsies,

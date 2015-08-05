@@ -2,8 +2,9 @@
     "use strict";
 
     angular.module('quizMaster')
-        .controller('demoController', function ($scope, keywords, subjects, quizes, notFunny) {
+        .controller('demoController', function ($scope, $q, keywords, subjects, quizes, quizesList, notFunny) {
 
+            $scope.quizesList = quizesList;
 
             // ----- MAIN FUNCTION FOR GENERATING TEST START
             (function generateTest() {
@@ -11,9 +12,6 @@
                 // initialize test object
                 $scope.test = {};
 
-                // we grab the quizes, from a service
-                // $scope.quizesList = quizes.list;
-                $scope.quizesList = quizes.quizes;
                 // create a shuffled set of to-do quizes
                 $scope.test.toDoQuizes = (function () {
                     return shuffleArray($scope.quizesList);
@@ -147,7 +145,7 @@
             // };
 
             // console.log($scope.getPrintObject($scope.test));
-            console.log($scope.test);
+            // console.log($scope.test);
 
         }); // END OF CONTROLLER
 
