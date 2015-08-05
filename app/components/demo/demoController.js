@@ -24,7 +24,6 @@
                 $scope.test.submitedQuizes = [];
                 $scope.test.submitedNumberOfQuizes = $scope.test.submitedQuizes.length;
                 $scope.test.immediateFeedback = true;
-                $scope.test.effectivity = 0;
 
                 // update current quiz action
                 $scope.test.updateCurrentQuiz = function () {
@@ -35,6 +34,14 @@
                         this.currentQuizIndex += 1;
                     }
                     this.currentQuiz = this.toDoQuizes[this.currentQuizIndex];
+                };
+
+                // let's calculate points in percentage
+                $scope.test.points = 0;
+                $scope.test.score = 0;
+                $scope.test.maxPoints = $scope.quizesList.length;
+                $scope.test.updateScore = function () {
+                    $scope.test.score = (100 * $scope.test.points) / $scope.test.maxPoints;
                 };
 
                 // ----- FUNCTION FOR INITIALIZING THE QUIZES -----
@@ -89,6 +96,8 @@
                         qz.submit = function () {
                             this.submitted = true;
                             if (this.isSelectionCorrect()) {
+                                $scope.test.points += 1;
+                                $scope.test.updateScore();
                                 this.feedback = "Correct!";
                                 this.sarcasm = $scope.randomSarcasmCorrect();
                             }
