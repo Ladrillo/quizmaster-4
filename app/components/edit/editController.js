@@ -101,6 +101,13 @@
                 }
             };
 
+            $scope.remove = function (element, array) {
+                var idx = array.indexOf(element);
+                if (idx !== -1) {
+                    array.splice(idx, 1);
+                }
+            };
+
             var getRealKeywords = function (keywordsArray) {
                 return keywords.list.filter(function (kw) {
                     return keywordsArray.indexOf(kw.name) !== -1;

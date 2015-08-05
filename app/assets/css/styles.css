@@ -2,11 +2,11 @@
     font-family: 'Droid Serif', serif;
 }
 
-.list-group-item.ng-binding.ng-scope.falsy {
+.falsy {
     color: red;
 }
 
-.list-group-item.ng-binding.ng-scope.truthy {
+.truthy {
     color: darkblue;
 }
 
