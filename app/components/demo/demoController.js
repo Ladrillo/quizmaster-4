@@ -18,11 +18,13 @@
                 } ());
 
                 // the test needs fields, for calculations
+                $scope.gameOver = false;
                 $scope.test.currentQuizIndex = 0;
                 $scope.test.currentQuiz = $scope.test.toDoQuizes[$scope.test.currentQuizIndex];
                 $scope.test.totalNumberOfQuizes = $scope.test.toDoQuizes.length;
-                $scope.test.submitedQuizes = [];
-                $scope.test.submitedNumberOfQuizes = $scope.test.submitedQuizes.length;
+                // $scope.test.submitedQuizes = [];
+                $scope.test.submitedQuizes = 0;
+                // $scope.test.submitedNumberOfQuizes = $scope.test.submitedQuizes.length;
                 $scope.test.immediateFeedback = true;
 
                 // update current quiz action
@@ -92,6 +94,13 @@
                             return jQuery(this.selectedAnswers).not(this.truthies).length === 0 && jQuery(this.truthies).not(this.selectedAnswers).length === 0;
                         };
 
+                        // checks if game over
+                        qz.checkGameOver = function () {
+                            if ($scope.test.submitedQuizes === $scope.test.totalNumberOfQuizes) {
+                                $scope.gameOver = true;
+                            }
+                        };
+
                         // submits current quiz
                         qz.submit = function () {
                             this.submitted = true;
@@ -105,6 +114,8 @@
                                 this.feedback = "Sorry, that's incorrect.";
                                 this.sarcasm = $scope.randomSarcasmIncorrect();
                             }
+                            $scope.test.submitedQuizes += 1;
+                            this.checkGameOver();
                         };
 
 
