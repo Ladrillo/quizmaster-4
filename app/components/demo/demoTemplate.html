@@ -30,7 +30,7 @@
                 </div>
                 <!--submit and next buttons-->
                 <div class="btn-group next-or-submit-buttons" role="group">
-                    <button ng-disabled="!quiz.selectedAnswers.length" ng-hide="quiz.submitted" ng-click="quiz.submit()" type="button" class="btn btn-warning">Submit</button>
+                    <button ng-disabled="!quiz.selectedAnswers.length && !quiz.allFalseClicked" ng-hide="quiz.submitted" ng-click="quiz.submit()" type="button" class="btn btn-warning">Submit</button>
                     <button ng-click="test.updateCurrentQuiz()" type="button" class="btn btn-default">Next</button>
                 </div>
             </div>
