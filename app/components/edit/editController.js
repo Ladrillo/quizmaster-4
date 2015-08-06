@@ -73,7 +73,7 @@
 
             // HERE ARE THE FUNCTIONS THAT DEAL WITH ADDING NEW SUBJECTS AND KEYWORDS
             $scope.addNewSubject = function () {
-                var exists = subjects.list.indexOf($scope.newSubjectName) !== -1;
+                var exists = this.subjectsList.indexOf($scope.newSubjectName) !== -1;
 
                 if ($scope.newSubjectForm.$valid && !exists) {
                     $log.info('Form is valid');
@@ -86,7 +86,7 @@
             };
 
             $scope.addNewKeyword = function () {
-                var exists = keywords.list.some(function (kwrd) {
+                var exists = this.keywordsList.some(function (kwrd) {
                     return kwrd.name === $scope.newKeywordName && kwrd.subject === $scope.subjectSelection; });
 
                 if ($scope.newKeywordForm.$valid && !exists) {
@@ -128,7 +128,7 @@
             };
 
             var getRealKeywords = function (keywordsArray) {
-                return keywords.list.filter(function (kw) {
+                return $scope.keywordsList.filter(function (kw) {
                     return keywordsArray.indexOf(kw.name) !== -1;
                 });
             };
