@@ -5,10 +5,10 @@
         .controller('editController', function (
             $scope,
             $log,
-            // services:
-            subjects,
-            keywords,
-            quizes,
+            // services not currently used:
+            // subjects,
+            // keywords,
+            // quizes,
             // resolved in router:
             subjectsList,
             subjectSubmit,
@@ -134,7 +134,7 @@
             };
 
             $scope.addNewQuiz = function () {
-                // testing firebase, using quizSubmit() that comes from routing
+                // using firebase! quizSubmit comes from a resolve in the route
                 quizSubmit({
                         stem: $scope.newStem,
                         truthies: $scope.truthies,
@@ -154,7 +154,7 @@
             };
 
             $scope.quizFormAdecuate = function () {
-                return ($scope.truthies.length > 1 && $scope.falsies.length > 1  && $scope.newStem.length >= 3);
+                return ($scope.truthies.length >= 1 && $scope.falsies.length >= 1  && $scope.newStem.length >= 3);
             };
 
 

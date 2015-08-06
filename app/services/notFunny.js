@@ -4,22 +4,18 @@
     angular.module('quizMaster')
         .service('notFunny', function () {
             this.sarcasmCorrect = [
-                "I hope that wasn't too hard.",
-                "You got lucky.",
-                "My six-year-old nephew knows the answer to this one.",
+                "I hope that didn't wear you out.",
+                "You got lucky this time.",
                 "You truly are a genius.",
-                "Your family must be really proud of you.",
-                "Do you want a medal?",
+                "Maybe you want a medal now.",
                 "Now go and tell your friends about it."
             ];
             this.sarcasmIncorrect = [
-                "Pathetic.",
-                "My six-year-old nephew knows the answer to this one.",
+                "My six-year-old nephew could do better.",
                 "Nice going.",
                 "Better luck next time.",
                 "You are wasting your time.",
-                "And your grandma thought you sooo talented. Yeah, right.",
-                "You entire existance is incorrect"
+                "Are you sure you are up to this?"
             ];
         });
 
