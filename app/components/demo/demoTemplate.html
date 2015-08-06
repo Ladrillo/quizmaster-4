@@ -13,7 +13,7 @@
             <p>selection correct: {{ quiz.isSelectionCorrect() }}</p>-->
             <div class="btn-group-vertical">
                 <button ng-disabled="quiz.submitted" ng-class="quiz.isAnswerSelected(answer) ? 'btn btn-default' : 'btn btn-primary'" ng-repeat="answer in quiz.shuffledAnswers"
-                ng-click="quiz.updateSelection(answer)" type="button" class="btn btn-default">{{ $index + 1 }}- {{ answer }}</button>
+                ng-click="quiz.updateSelection(answer)" type="button" class="btn btn-default"><span class="badge">{{ $index + 1 }} </span> {{ answer }}</button>
                 <button ng-disabled="quiz.submitted" ng-class="quiz.allFalseClicked ? 'btn btn-primary' : 'btn btn-default'"
                 class="btn btn-default" ng-click="quiz.allFalse()" type="button">All statements are false!</button>
             </div>
