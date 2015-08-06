@@ -17,13 +17,14 @@
                         <label for="subjects-list">Don't see what you need?</label>
                         <div class="form-group">
                             <input required ng-pattern="/.{3}/" ng-model="newSubjectName" id="subjects-list" type="text" class="form-control" placeholder="Type name of new subject...">
+                            <input type="text" style="display: none;" />
                         </div>
-                        <button ng-disabled="newSubjectForm.$invalid" type="submit" class="btn btn-danger" ng-click="addNewSubject()">Create New Subject</button>
+                        <button ng-disabled="newSubjectForm.$invalid" type="button" class="btn btn-danger" ng-click="addNewSubject()">Create New Subject</button>
                     </div>
                 </div>
             </form>
             <!--THIS IS THE KEYWORDS FORMS-->
-            <!--ng-show="keyword.subject.name === subjectSelection" INSERT THIS LINE-->
+            <!--ng-show="keyword.subject.name===s ubjectSelection" INSERT THIS LINE-->
             <form action="" name="newKeywordForm" ng-show="subjectChecked">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -39,8 +40,9 @@
                         <label for="keywords-list">Don't see what you need?</label>
                         <div class="form-group">
                             <input required ng-pattern="/.{3}/" ng-model="newKeywordName" id="keywords-list" type="text" class="form-control" placeholder="Type name of new keyword...">
+                            <input type="text" style="display: none;" />
                         </div>
-                        <button ng-disabled="newKeywordForm.$invalid" type="submit" class="btn btn-danger" ng-click="addNewKeyword()">Create New Keyword</button>
+                        <button ng-disabled="newKeywordForm.$invalid" type="button" class="btn btn-danger" ng-click="addNewKeyword()">Create New Keyword</button>
                     </div>
                 </div>
             </form>
@@ -65,7 +67,7 @@
                             <div class="input-group">
                                 <input type="text" ng-model="newTruthy" class="form-control" placeholder="Type truthy stuff...">
                                 <span class="input-group-btn">
-                                    <button type='button' id="truthyId" required ng-pattern="/.{1}/" ng-disabled="!stemFieldAdecuate()" class="btn btn-default"
+                                    <button type='button' id="truthyId" required ng-disabled="!stemFieldAdecuate()" class="btn btn-default"
                                     value="Add" ng-click="addNewTruthy(newTruthy)">Add</button>
                                 </span>
                             </div>
@@ -87,7 +89,7 @@
                             <div class="input-group">
                                 <input type="text" ng-model="newFalsy" class="form-control" placeholder="Type falsy stuff...">
                                 <span class="input-group-btn">
-                                    <button type='button' id="falsyId" required ng-pattern="/.{1}/" ng-disabled="!stemFieldAdecuate()" class="btn btn-default"
+                                    <button type='button' id="falsyId" required ng-disabled="!stemFieldAdecuate()" class="btn btn-default"
                                     type="submit" value="Add" ng-click="addNewFalsy(newFalsy)">Add</button>
                                 </span>
                             </div>
@@ -103,7 +105,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <button ng-disabled="!quizFormAdecuate()" type="submit" class="btn btn-danger" ng-click="addNewQuiz()">Create New Quiz!</button>
+                        <button ng-disabled="!quizFormAdecuate()" type="button" class="btn btn-danger" ng-click="addNewQuiz()">Create New Quiz!</button>
                     </div>
                 </div>
             </form>
