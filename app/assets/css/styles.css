@@ -37,3 +37,8 @@ div.answers {
     display: flex;
     justify-content: space-between;
 }
+
+span.badge.badge-option {
+    margin-right: 10px;
+    /*background-color: #777;*/
+}
